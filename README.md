@@ -233,6 +233,12 @@ _Benchmarks ran locally using the Soroban Rust SDK test environment (Protocol 26
 - [x] Phase 6: Multi-round Dutch auction with ZK reserve price proof (v3) — **shipped & verified on-chain.** Real `reserve_proof.circom` Groth16 circuit (private reserve price + Poseidon commitment + Dutch price-schedule constraints) → BN254 proof → on-chain `verify_proof` against a dedicated reserve VK on testnet verifier `CA3DTYCC77WMKD7Y43T7TR6SCO5OZVO5FSMF2ALSX5KK7PNQRQ3UQA6W`; the auction's `prove_reserve_met_v3` calls it. Reproduce: `npm run prove:demo:reserve` (real proof → `true`, tampered inputs → `false`). Covered by `test_real_reserve_proof_verification` + `test_prove_reserve_met_v3_*`.
 - [ ] Phase 7: Hosted/decentralized prover network (e.g. Sindri) for high-frequency auction batches — _blocked on external infra: requires a third-party proving account + API key, not available in this environment. The `prove:demo:reserve` pipeline is the integration point; plugging a remote prover in is a credentialed config change, not new protocol work. Not deployed — left honest rather than stubbed._
 
+## 📽️ Demo Materials
+
+- **GitHub Repository**: [https://github.com/edycutjong/sotto](https://github.com/edycutjong/sotto)
+- **Live App URL**: [https://sotto.edycu.dev](https://sotto.edycu.dev)
+- **Pitch Deck**: [https://sotto.edycu.dev/pitch.html](https://sotto.edycu.dev/pitch.html)
+
 ---
 
 ## 📄 License

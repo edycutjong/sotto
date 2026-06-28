@@ -542,6 +542,22 @@ export default function SottoDashboard() {
               <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse"></span>
               STELLAR TESTNET
             </span>
+            <a
+              href="https://github.com/edycutjong/sotto"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-white text-xs font-mono transition-colors ml-4"
+            >
+              [ GitHub ]
+            </a>
+            <a
+              href="/pitch.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-white text-xs font-mono transition-colors ml-2"
+            >
+              [ Pitch Deck ]
+            </a>
           </div>
 
           <div className="flex items-center gap-4">
