@@ -1,7 +1,9 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Sotto Smoke Test - Demo Mode", () => {
-  test("should load the landing page and have correct title", async ({ page }) => {
+  test("should load the landing page and have correct title", async ({
+    page,
+  }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Sotto — Sealed-Bid Procurement/);
   });

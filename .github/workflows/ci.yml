@@ -164,7 +164,8 @@ jobs:
   # ── STAGE 6: Release & Deploy (main only) ─────────────────
   deploy:
     name: "Stage 6 · Release & Deploy"
-    needs: [build, e2e, performance, secret-scan, dependency-audit, contract-quality]
+    needs:
+      [build, e2e, performance, secret-scan, dependency-audit, contract-quality]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:

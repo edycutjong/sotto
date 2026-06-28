@@ -6,10 +6,18 @@ declare module "snarkjs" {
       wasmFile: string,
       zkeyFile: string,
     ): Promise<{ proof: unknown; publicSignals: string[] }>;
-    verify(vk: unknown, publicSignals: string[], proof: unknown): Promise<boolean>;
+    verify(
+      vk: unknown,
+      publicSignals: string[],
+      proof: unknown,
+    ): Promise<boolean>;
   };
   export const wtns: {
-    calculate(input: Record<string, unknown>, wasmFile: string, wtnsFile: string): Promise<void>;
+    calculate(
+      input: Record<string, unknown>,
+      wasmFile: string,
+      wtnsFile: string,
+    ): Promise<void>;
     exportJson(wtnsFile: string): Promise<bigint[]>;
   };
 }

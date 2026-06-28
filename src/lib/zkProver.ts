@@ -5,9 +5,12 @@ import crypto from "crypto";
 // ---- soroban bls12-381 byte serialization ----
 // G1 = be(x,48)||be(y,48); G2 = be(Xc1)||be(Xc0)||be(Yc1)||be(Yc0); Fr = be(v,32)
 function beBytes(dec: string, len: number): Uint8Array {
-  const h = BigInt(dec).toString(16).padStart(len * 2, "0");
+  const h = BigInt(dec)
+    .toString(16)
+    .padStart(len * 2, "0");
   const out = new Uint8Array(len);
-  for (let i = 0; i < len; i++) out[i] = parseInt(h.slice(i * 2, i * 2 + 2), 16);
+  for (let i = 0; i < len; i++)
+    out[i] = parseInt(h.slice(i * 2, i * 2 + 2), 16);
   return out;
 }
 function g1Bytes(p: string[]): Uint8Array {
@@ -25,7 +28,11 @@ function g2Bytes(p: string[][]): Uint8Array {
   return o;
 }
 
-export function serializeProof(proof: { pi_a: string[]; pi_b: string[][]; pi_c: string[] }): Uint8Array {
+export function serializeProof(proof: {
+  pi_a: string[];
+  pi_b: string[][];
+  pi_c: string[];
+}): Uint8Array {
   const out = new Uint8Array(384);
   out.set(g1Bytes(proof.pi_a), 0);
   out.set(g2Bytes(proof.pi_b), 96);
@@ -40,7 +47,8 @@ export function serializePublicInputs(publicSignals: string[]): Uint8Array[] {
 export function toField(v: string | number): string {
   if (typeof v === "number") return Math.trunc(v).toString();
   if (/^\d+$/.test(v)) return v;
-  if (/^(0x)?[0-9a-fA-F]+$/.test(v)) return BigInt(v.startsWith("0x") ? v : "0x" + v).toString();
+  if (/^(0x)?[0-9a-fA-F]+$/.test(v))
+    return BigInt(v.startsWith("0x") ? v : "0x" + v).toString();
   // arbitrary string -> sha256 mod 2^248
   const h = crypto.createHash("sha256").update(v).digest("hex");
   return BigInt("0x" + h.slice(0, 62)).toString();
@@ -77,7 +85,11 @@ export class SottoProver {
       amount: Math.trunc(b.amount),
       salt: toField(b.salt),
     }));
-    while (padded.length < N) padded.push({ amount: args.maxBudget, salt: toField(crypto.randomBytes(8).toString("hex")) });
+    while (padded.length < N)
+      padded.push({
+        amount: args.maxBudget,
+        salt: toField(crypto.randomBytes(8).toString("hex")),
+      });
 
     const competitorBids = padded.map((b) => String(b.amount));
     const competitorSalts = padded.map((b) => String(b.salt));

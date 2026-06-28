@@ -1,4 +1,5 @@
 <!-- BEGIN:nextjs-agent-rules -->
+
 # This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
@@ -7,12 +8,15 @@ This version has breaking changes — APIs, conventions, and file structure may 
 # 📯 Sotto — Agent Instructions
 
 ## Project
+
 Sealed-bid procurement auctions settled natively with Zero-Knowledge winner proofs on Stellar Soroban.
 
 ## Hackathon
+
 **Stellar Hacks: Real-World ZK 2026** — Proving compliance and privacy at host speed.
 
 ## Structure
+
 - `contracts/` — Soroban smart contracts source code (`SottoAuctionContract`, `SottoVerifier`)
 - `circuits/` — Circom solvency/auction winner circuits
 - `src/app/` — Next.js 16 App Router pages & API routes
@@ -21,16 +25,18 @@ Sealed-bid procurement auctions settled natively with Zero-Knowledge winner proo
 - `scripts/` — Automated release, testing, and benchmark scripts
 
 ## Tech Stack
-| Layer | Technology |
-|---|---|
-| **Frontend** | Next.js 16 (App Router), React 19 |
-| **Styling** | Tailwind CSS v4 |
-| **ZK Circuits** | Circom (Groth16), snarkjs WASM prover |
-| **Smart Contracts** | Soroban (Rust SDK) |
-| **Database** | Supabase (PostgreSQL) |
-| **CI/CD** | GitHub Actions |
+
+| Layer               | Technology                            |
+| ------------------- | ------------------------------------- |
+| **Frontend**        | Next.js 16 (App Router), React 19     |
+| **Styling**         | Tailwind CSS v4                       |
+| **ZK Circuits**     | Circom (Groth16), snarkjs WASM prover |
+| **Smart Contracts** | Soroban (Rust SDK)                    |
+| **Database**        | Supabase (PostgreSQL)                 |
+| **CI/CD**           | GitHub Actions                        |
 
 ## Key Rules
+
 - **Frontend** = ESM (`import`), Next.js 16, React 19, Tailwind v4
 - **Contracts Compiler Target** = `wasm32v1-none` under Rust 1.82+ to support native BN254 host functions.
 - **CI** = `npm run ci` -> audit + lint + typecheck + test:coverage (must pass 100%)
@@ -39,6 +45,7 @@ Sealed-bid procurement auctions settled natively with Zero-Knowledge winner proo
 - **Aesthetic** = Cyberpunk-terminal / Military SOC, dark mode only, glassmorphism cards
 
 ## Critical Patterns
+
 - All state initialization uses **lazy initializers** (not setState-in-useEffect)
 - `params` is a **Promise** in Next.js 16 — must `await`
 - `PageProps<'/path'>` and `RouteContext<'/path'>` are global type helpers
@@ -47,6 +54,7 @@ Sealed-bid procurement auctions settled natively with Zero-Knowledge winner proo
 - Unused catch variables use underscore prefix (`_err`)
 
 ## Commits & Releases
+
 - **Conventional Commits required** — all commit messages MUST follow the format: `type(scope): description`
 - Types: `feat`, `fix`, `perf`, `refactor`, `chore`, `docs`, `ci`, `test`, `style`
 - Release bump: handled automatically in Stage 6 CI via `scripts/release-bump.ts`

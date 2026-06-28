@@ -26,7 +26,14 @@ export function triggerConfetti() {
   };
   window.addEventListener("resize", handleResize);
 
-  const colors = ["#06b6d4", "#22c55e", "#a855f7", "#f59e0b", "#ef4444", "#ffffff"];
+  const colors = [
+    "#06b6d4",
+    "#22c55e",
+    "#a855f7",
+    "#f59e0b",
+    "#ef4444",
+    "#ffffff",
+  ];
   const particles: Array<{
     x: number;
     y: number;

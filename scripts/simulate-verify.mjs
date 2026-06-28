@@ -1,4 +1,14 @@
-import { rpc, TransactionBuilder, Networks, Contract, Address, nativeToScVal, xdr, Account, scValToNative } from "@stellar/stellar-sdk";
+import {
+  rpc,
+  TransactionBuilder,
+  Networks,
+  Contract,
+  Address,
+  nativeToScVal,
+  xdr,
+  Account,
+  scValToNative,
+} from "@stellar/stellar-sdk";
 import * as fs from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,7 +27,7 @@ const server = new rpc.Server("https://soroban-testnet.stellar.org");
 
 async function run() {
   const proofBuf = Buffer.from(f.proof.a + f.proof.b + f.proof.c, "hex");
-  const pubInputs = f.pub.map(p => Buffer.from(p, "hex"));
+  const pubInputs = f.pub.map((p) => Buffer.from(p, "hex"));
 
   console.log("Simulating verify_proof via SDK...");
   console.log("Proof length:", proofBuf.length, "bytes");
@@ -28,7 +38,7 @@ async function run() {
   const call = contract.call(
     "verify_proof",
     nativeToScVal(proofBuf),
-    nativeToScVal(pubInputs)
+    nativeToScVal(pubInputs),
   );
 
   // Simulating needs a dummy transaction from a valid source account.
@@ -36,28 +46,28 @@ async function run() {
   const source = "GAZV4ZZRKEWHOHWSVKLX7VZVDGJ6GAVSPHMFDBYMS6WQ74DBYP3FOMMX";
   const account = new Address(source);
 
-  const tx = new TransactionBuilder(
-    new Account(source, "0"),
-    {
-      fee: "100",
-      networkPassphrase: Networks.TESTNET,
-    }
-  )
+  const tx = new TransactionBuilder(new Account(source, "0"), {
+    fee: "100",
+    networkPassphrase: Networks.TESTNET,
+  })
     .addOperation(call)
     .setTimeout(30)
     .build();
 
   console.log("Submitting simulation request...");
   const sim = await server.simulateTransaction(tx);
-  
+
   if (rpc.Api.isSimulationSuccess(sim)) {
     const resultScVal = sim.result.retval;
     const verified = scValToNative(resultScVal);
     console.log("Simulation succeeded! verify_proof returned:", verified);
-    
+
     // Log the events if any
     if (sim.events) {
-      console.log("Events:", sim.events.map(e => e.event.toXDR("base64")));
+      console.log(
+        "Events:",
+        sim.events.map((e) => e.event.toXDR("base64")),
+      );
     }
   } else {
     console.error("Simulation failed:", sim.error || sim);

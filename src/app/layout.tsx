@@ -22,14 +22,16 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Sotto — Sealed-Bid Procurement Auction Engine",
-  description: "Sealed-bid procurement auctions settled natively with ZK winner proofs on Stellar.",
+  description:
+    "Sealed-bid procurement auctions settled natively with ZK winner proofs on Stellar.",
   icons: {
     icon: "/icon.svg",
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "Sotto — Sealed-Bid Procurement Auction Engine",
-    description: "Sealed-bid procurement auctions settled natively with ZK winner proofs on Stellar.",
+    description:
+      "Sealed-bid procurement auctions settled natively with ZK winner proofs on Stellar.",
     url: "https://sotto.edycu.dev",
     siteName: "Sotto",
     images: [
@@ -46,7 +48,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Sotto — Sealed-Bid Procurement Auction Engine",
-    description: "Sealed-bid procurement auctions settled natively with ZK winner proofs on Stellar.",
+    description:
+      "Sealed-bid procurement auctions settled natively with ZK winner proofs on Stellar.",
     images: ["/og-image.png"],
   },
 };

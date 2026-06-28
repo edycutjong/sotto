@@ -1,4 +1,4 @@
-const { execSync } = require('child_process');
+const { execSync } = require("child_process");
 
 console.log("============================================================");
 console.log("SOTTO CRYPTOGRAPHIC PROTOCOL TEST SUITE RUNNER");
@@ -6,7 +6,7 @@ console.log("============================================================");
 
 try {
   console.log("Executing Jest test suite...");
-  execSync('npx jest --colors', { stdio: 'inherit' });
+  execSync("npx jest --colors", { stdio: "inherit" });
   console.log("============================================================");
   console.log("✅ All Sotto tests passed successfully!");
   console.log("============================================================");

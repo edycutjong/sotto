@@ -1,21 +1,18 @@
-const nextJest = require('next/jest');
+const nextJest = require("next/jest");
 
 const createJestConfig = nextJest({
-  dir: './',
+  dir: "./",
 });
 
 const customJestConfig = {
   setupFilesAfterEnv: [],
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: "jest-environment-jsdom",
   transform: {
-    '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
+    "^.+\\.(ts|tsx)$": ["ts-jest", { tsconfig: "tsconfig.json" }],
   },
-  modulePathIgnorePatterns: ['<rootDir>/e2e/'],
+  modulePathIgnorePatterns: ["<rootDir>/e2e/"],
   collectCoverage: true,
-  collectCoverageFrom: [
-    'src/lib/**/*.ts',
-    '!src/lib/confetti.ts',
-  ],
+  collectCoverageFrom: ["src/lib/**/*.ts", "!src/lib/confetti.ts"],
 };
 
 module.exports = createJestConfig(customJestConfig);
