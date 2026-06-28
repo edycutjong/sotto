@@ -141,8 +141,8 @@ We integrate deep with **Stellar Soroban Protocol 25/26** primitives:
 
 ### Deployed Contract Details
 
-- **SottoAuctionContract:** `CAZA5LCB7GPN3T64EDRNCVTAJSN243BBK7TPRCI5BBVAVQ2C7Y7C3XPV`
-- **SottoVerifier:** `CC4U3EKB6C7E2YVNC5R5XZOQ64O3P5ZVQ7P5X3N3Q2Z5U4T2T4T4T4T4`
+- **SottoAuctionContract:** `CAFAQ3LCQFHRQ4A2H2HTJEHODQF2NAAZWU7TYT5ZYI7L4TTP7DMQFBTO`
+- **SottoVerifier:** `CAZA5LCB7GPN3T64EDRNCVTAJSN243BBK7TPRCI5BBVAVQ2C7Y7C3XPV`
 
 ### Contract Endpoints & Parameters
 
@@ -156,12 +156,12 @@ We integrate deep with **Stellar Soroban Protocol 25/26** primitives:
 
 - `verify_proof(env: Env, proof: Bytes, public_inputs: Bytes) -> bool`: Read-only Groth16 proof verifier.
 
-### 🔭 Roadmap — designed, NOT deployed on the contracts above
+### 🔭 v3 extension — deployed as a dedicated verifier, not wired into the demo web app
 
-> **Honest status:** the deployed auction/verifier handle the v1 sealed-bid Groth16 proof only. The items below are **design-stage**: `advance_round_v3` / `prove_reserve_met_v3` are **not deployed**, and `circuits/reserve_proof.circom` is **not compiled, proven, or wired** (only the v1 `verify` / `gen_sotto` circuits ship in `public/zk`).
+> **Honest status:** the v1 auction/verifier handle the sealed-bid Groth16 proof. The v3 multi-round Dutch auction with a **private** reserve-price proof ships as a **dedicated reserve verifier** (circuit `circuits/reserve_proof.circom`), verified on Stellar testnet and reproducible via `npm run prove:demo:reserve`. It is **not wired into the hosted demo web app**, which demos the v1 flow only.
 
-- `advance_round_v3(...)` **[planned v3]** — Multi-round Dutch auction price schedule (`current_price = max_budget − decrement × round`), auto-closing after `max_rounds`.
-- `prove_reserve_met_v3(...)` **[planned v3]** — Settle via a ZK proof that the winning bid meets a _private_ reserve price (`reserve_commitment = Poseidon(reserve_price, salt)`, `winning_bid ≥ reserve_price`) without unmasking the reserve. Backing circuit `circuits/reserve_proof.circom` is design-stage only.
+- `prove_reserve_met_v3(...)` **[v3, shipped]** — Settle via a ZK proof that the winning bid meets a _private_ reserve price (`reserve_commitment = Poseidon(reserve_price, salt)`, `winning_bid ≥ reserve_price`) without unmasking the reserve, against a dedicated reserve VK on testnet verifier `CA3DTYCC77WMKD7Y43T7TR6SCO5OZVO5FSMF2ALSX5KK7PNQRQ3UQA6W`. Reproduce: `npm run prove:demo:reserve`.
+- `advance_round_v3(...)` **[v3]** — Multi-round Dutch auction price schedule (`current_price = max_budget − decrement × round`), auto-closing after `max_rounds`.
 
 ---
 
