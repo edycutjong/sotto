@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sotto · Pitch Deck</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, .font-display { font-family: 'Outfit', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .slide { display: none; animation: fade .4s ease; }
+    .slide.active { display: flex; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    ::-webkit-scrollbar { width: 0; }
+  </style>
+</head>
+<body class="bg-[#09090b] text-zinc-100 h-full overflow-hidden flex flex-col justify-between">
+  <div class="flex-1 flex items-center justify-center p-6 md:p-10 relative overflow-y-auto">
+
+    <!-- 1 Title -->
+    <div class="slide active max-w-5xl w-full flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 01 // Title</span>
+        <h1 class="text-6xl md:text-7xl font-black tracking-tighter leading-none mb-6">SOTTO <span class="text-red-500">🤫</span></h1>
+        <p class="text-2xl font-display text-zinc-200 mb-4">The bid stays sealed. The winner is provable.</p>
+        <p class="text-zinc-400 text-lg max-w-md">Sealed-bid procurement auctions where the winner proves they had the lowest valid bid in <span class="text-red-400">zero knowledge</span> — no reveal phase, no leaked bids, no griefing.</p>
+      </div>
+      <div class="flex-1 bg-zinc-900 border border-zinc-800 rounded-2xl p-8 max-w-md w-full relative">
+        <div class="absolute inset-0 bg-linear-to-br from-red-500/10 to-transparent rounded-2xl"></div>
+        <span class="text-[10px] mono text-zinc-500 block mb-3 uppercase">Soroban · BN254 Pairing Check</span>
+        <p class="text-sm mono text-zinc-300 leading-relaxed">settle(proof, winnerIndex, ax, ay)<br><span class="text-emerald-400">→ valid → payout + rebate ✓</span><br><span class="text-red-400">→ tampered → reject ✗</span></p>
+        <p class="text-[10px] mono text-zinc-600 mt-4">Stellar Hacks: Real-World ZK · DoraHacks</p>
+      </div>
+    </div>
+
+    <!-- 2 Problem -->
+    <div class="slide max-w-5xl w-full flex-col text-left">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 02 // The Problem</span>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">Sealed bids aren't actually sealed.</h2>
+      <div class="grid md:grid-cols-2 gap-5 max-w-4xl">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6"><p class="text-red-400 font-display font-bold mb-2">Bid leaking & collusion</p><p class="text-zinc-400 text-sm">Sealed bids run over email get leaked — a favored contractor underbids competitors by exactly $1.</p></div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6"><p class="text-red-400 font-display font-bold mb-2">Reveal-phase griefing</p><p class="text-zinc-400 text-sm">Commit-and-reveal needs everyone to reveal after the deadline. A losing bidder refuses — and freezes the escrow indefinitely.</p></div>
+      </div>
+      <p class="text-zinc-500 text-sm mt-6 max-w-3xl">Procurement is a multi-trillion-dollar flow. A 1% manipulation on a $10M contract = $100K skimmed, per deal.</p>
+    </div>
+
+    <!-- 3 Solution -->
+    <div class="slide max-w-5xl w-full flex-col text-left">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 03 // The Solution</span>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">A sealed-bid engine with no reveal phase.</h2>
+      <p class="text-zinc-300 text-lg max-w-3xl mb-8">Bids stay on-chain as Poseidon commitments. After close, <span class="text-red-400">only the winner</span> proves: valid bid, lowest of all commitments, matches their commitment, signed by their key.</p>
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="border-l-2 border-red-500 pl-4"><p class="font-display font-bold">🔒 Private</p><p class="text-zinc-400 text-sm">losing bids never revealed</p></div>
+        <div class="border-l-2 border-red-500 pl-4"><p class="font-display font-bold">🚫 No griefing</p><p class="text-zinc-400 text-sm">losers do nothing</p></div>
+        <div class="border-l-2 border-red-500 pl-4"><p class="font-display font-bold">🖊️ Winner-bound</p><p class="text-zinc-400 text-sm">in-circuit EdDSA</p></div>
+        <div class="border-l-2 border-red-500 pl-4"><p class="font-display font-bold">💸 Vickrey</p><p class="text-zinc-400 text-sm">auto payout + rebate</p></div>
+      </div>
+    </div>
+
+    <!-- 4 Demo -->
+    <div class="slide max-w-5xl w-full flex-col text-left">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 04 // Live Demo & Flow</span>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">What the judges see</h2>
+      <div class="bg-black border border-zinc-800 rounded-xl p-6 mono text-sm leading-relaxed max-w-3xl">
+        <p class="text-zinc-500">$ npm run prove:demo</p>
+        <p class="text-zinc-300">1. create_auction(budget, reserve, deadline) → escrow</p>
+        <p class="text-zinc-300">2. submit_bid(Poseidon(bid, salt))  × N  (sealed)</p>
+        <p class="text-zinc-300">3. ledger sequence passes deadline time-lock</p>
+        <p class="text-zinc-300">4. winner proof: lowest valid bid + EdDSA sig</p>
+        <p class="text-zinc-300">5. settle(...) → BN254 pairing on-chain</p>
+        <p class="text-emerald-400">   valid   → payout to winner + rebate ✓</p>
+        <p class="text-red-400">   tampered → rejected ✗</p>
+      </div>
+      <p class="text-zinc-500 text-sm mt-4 max-w-3xl">The auction settles and pays out without any loser ever revealing their bid. Hosted app = UX sandbox; load-bearing ZK = <span class="text-red-400 mono">prove:demo</span> + deployed verifier.</p>
+    </div>
+
+    <!-- 5 Architecture -->
+    <div class="slide max-w-5xl w-full flex-col text-left">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 05 // Architecture & Tech</span>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Poseidon commitments. One pairing. Winner bound.</h2>
+      <div class="grid md:grid-cols-2 gap-4 max-w-4xl">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5"><p class="text-red-400 mono text-xs uppercase mb-1">ZK Circuit</p><p class="text-zinc-300 text-sm">Circom 2.1.6 / Groth16 bn128 · <span class="mono">LowestBidVerifier(N)</span> · Poseidon + comparators + EdDSA over C_w · nPublic = 8</p></div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5"><p class="text-red-400 mono text-xs uppercase mb-1">Verifier</p><p class="text-zinc-300 text-sm"><span class="mono">env.crypto().bn254().pairing_check()</span> — Groth16 at host speed (Protocol 25/26)</p></div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5"><p class="text-red-400 mono text-xs uppercase mb-1">Auction logic</p><p class="text-zinc-300 text-sm">ledger-sequence time-lock · instance storage for commitments/nullifiers · token escrow</p></div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5"><p class="text-red-400 mono text-xs uppercase mb-1">App</p><p class="text-zinc-300 text-sm">Next.js 16 / Supabase · ECIES-encrypted bid storage</p></div>
+      </div>
+      <p class="text-zinc-500 text-sm mt-4">Poseidon ~110× cheaper in-circuit than SHA-256 → on-chain verification is one pairing. EdDSA binds the settler to the winning bidder.</p>
+    </div>
+
+    <!-- 6 Market -->
+    <div class="slide max-w-5xl w-full flex-col text-left">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 06 // Market & Impact</span>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">A multi-trillion-dollar trust problem.</h2>
+      <div class="grid md:grid-cols-3 gap-6 max-w-4xl">
+        <div><p class="text-5xl font-black text-red-500 font-display">$T+</p><p class="text-zinc-400 text-sm mt-2">global B2B procurement spend flowing through reverse auctions every year.</p></div>
+        <div><p class="text-5xl font-black text-red-500 font-display">$B</p><p class="text-zinc-400 text-sm mt-2">e-procurement & e-sourcing software market — all exposed to bid leakage today.</p></div>
+        <div><p class="text-5xl font-black text-red-500 font-display">Gov</p><p class="text-zinc-400 text-sm mt-2">tenders legally require auditable integrity — Sotto's exact wedge.</p></div>
+      </div>
+    </div>
+
+    <!-- 7 Business -->
+    <div class="slide max-w-5xl w-full flex-col text-left">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 07 // Business Model</span>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">How Sotto survives the hackathon</h2>
+      <div class="space-y-4 max-w-3xl">
+        <div class="flex gap-4 items-start"><span class="text-red-500 font-display font-black">01</span><p class="text-zinc-300"><span class="font-bold">Per-auction settlement fee</span> — basis points on contract value, or flat per sourcing event.</p></div>
+        <div class="flex gap-4 items-start"><span class="text-red-500 font-display font-black">02</span><p class="text-zinc-300"><span class="font-bold">Enterprise SaaS</span> — white-label sealed-bid module for ERP / e-sourcing suites.</p></div>
+        <div class="flex gap-4 items-start"><span class="text-red-500 font-display font-black">03</span><p class="text-zinc-300"><span class="font-bold">Audit exports</span> — verifiable settlement receipts for government / regulated tenders.</p></div>
+        <div class="flex gap-4 items-start"><span class="text-red-500 font-display font-black">04</span><p class="text-zinc-300"><span class="font-bold">Cost moat</span> — sub-cent settlement undercuts every legacy e-sourcing platform.</p></div>
+      </div>
+    </div>
+
+    <!-- 8 Competitive -->
+    <div class="slide max-w-5xl w-full flex-col text-left">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 08 // Competitive Edge</span>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Why Sotto wins</h2>
+      <div class="overflow-x-auto max-w-4xl">
+        <table class="w-full text-sm border-collapse">
+          <thead><tr class="text-zinc-500 mono text-xs uppercase"><th class="text-left p-3"></th><th class="p-3">Email/PDF</th><th class="p-3">Commit-reveal</th><th class="p-3 text-red-400">Sotto</th></tr></thead>
+          <tbody class="text-zinc-300">
+            <tr class="border-t border-zinc-800"><td class="p-3 text-left text-zinc-400">Private after close</td><td class="p-3 text-center">❌</td><td class="p-3 text-center">❌</td><td class="p-3 text-center">✅</td></tr>
+            <tr class="border-t border-zinc-800"><td class="p-3 text-left text-zinc-400">Griefing-proof</td><td class="p-3 text-center">❌</td><td class="p-3 text-center">❌</td><td class="p-3 text-center text-red-400">✅ winner-only</td></tr>
+            <tr class="border-t border-zinc-800"><td class="p-3 text-left text-zinc-400">Trustless settlement</td><td class="p-3 text-center">❌</td><td class="p-3 text-center">⚠️</td><td class="p-3 text-center">✅</td></tr>
+            <tr class="border-t border-zinc-800"><td class="p-3 text-left text-zinc-400">Winner authenticity</td><td class="p-3 text-center">manual</td><td class="p-3 text-center">❌</td><td class="p-3 text-center text-red-400">✅ EdDSA</td></tr>
+            <tr class="border-t border-zinc-800"><td class="p-3 text-left text-zinc-400">Cost / auction</td><td class="p-3 text-center">staff hrs</td><td class="p-3 text-center">gas</td><td class="p-3 text-center">sub-cent</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 9 Traction -->
+    <div class="slide max-w-5xl w-full flex-col text-left">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 09 // Traction & Validation</span>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">Built & verified, not vaporware</h2>
+      <div class="grid md:grid-cols-2 gap-4 max-w-4xl">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5"><p class="text-emerald-400 font-display font-bold mb-1">✅ Verifies on testnet</p><p class="text-zinc-400 text-sm">Real Groth16 winner proof accepted on-chain — <span class="mono text-red-400">npm run prove:demo</span>.</p></div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5"><p class="text-emerald-400 font-display font-bold mb-1">✅ Negative control</p><p class="text-zinc-400 text-sm">Tampered inputs rejected on-chain.</p></div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5"><p class="text-emerald-400 font-display font-bold mb-1">✅ Soundness hardened</p><p class="text-zinc-400 text-sm">Winner bound via in-circuit EdDSA (nPublic 6 → 8); settle rewired to real signals.</p></div>
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5"><p class="text-emerald-400 font-display font-bold mb-1">✅ Cheap settlement</p><p class="text-zinc-400 text-sm">ZK verify + Vickrey payout ≈ 74,454 CPU (~0.07% budget). 101 unit tests green.</p></div>
+      </div>
+    </div>
+
+    <!-- 10 Roadmap -->
+    <div class="slide max-w-5xl w-full flex-col text-left">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 10 // Roadmap</span>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">30 / 60 / 90 days</h2>
+      <div class="grid md:grid-cols-3 gap-6 max-w-4xl">
+        <div class="border-t-2 border-red-500 pt-4"><p class="mono text-red-400 text-sm mb-2">30 DAYS</p><p class="text-zinc-300 text-sm">Redeploy BN254 + EdDSA verifier; stellar.expert verified; public testnet auction.</p></div>
+        <div class="border-t-2 border-zinc-700 pt-4"><p class="mono text-zinc-400 text-sm mb-2">60 DAYS</p><p class="text-zinc-300 text-sm">Variable bidder count, in-browser proving, bind winnerBid to public payout.</p></div>
+        <div class="border-t-2 border-zinc-700 pt-4"><p class="mono text-zinc-400 text-sm mb-2">90 DAYS</p><p class="text-zinc-300 text-sm">Combinatorial auctions, ERP connector, first live pilot tender.</p></div>
+      </div>
+    </div>
+
+    <!-- 11 Team -->
+    <div class="slide max-w-5xl w-full flex-col text-left">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-4">Slide 11 // Team</span>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Engineering leverage</h2>
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 max-w-3xl">
+        <p class="text-2xl font-display font-bold mb-2">Edy Cu</p>
+        <p class="text-red-400 mono text-sm mb-4">full-stack + applied-ZK engineer</p>
+        <p class="text-zinc-300">Solo-built the Circom auction circuit (lowest-bid + Poseidon + EdDSA), the Rust/Soroban auction & verifier contracts with Vickrey economics, and the Next.js procurement console. One of <span class="text-red-400">five</span> real on-chain ZK products shipped for this hackathon.</p>
+      </div>
+    </div>
+
+    <!-- 12 Ask -->
+    <div class="slide max-w-4xl w-full flex-col items-center text-center">
+      <span class="text-xs mono tracking-widest text-red-500 uppercase mb-6">Slide 12 // The Ask</span>
+      <h2 class="text-5xl md:text-6xl font-black tracking-tighter mb-6">The bid stays sealed.<br><span class="text-red-500">The winner is provable.</span></h2>
+      <p class="text-zinc-300 text-lg max-w-2xl mb-8">Sotto turns procurement integrity from a procedure you trust into a proof you verify — settled natively on Stellar.</p>
+      <div class="mb-8 bg-black border border-zinc-800 rounded-xl px-6 py-4 mono text-sm text-red-400">npm run prove:demo &nbsp;<span class="text-zinc-500"># try to forge a winner — you can't</span></div>
+
+      <div class="flex flex-wrap justify-center gap-4 text-xs font-display font-bold">
+        <a href="https://github.com/edycutjong/sotto" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 hover:border-red-500 rounded-xl text-zinc-300 hover:text-white transition-all">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://sotto.edycu.dev" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 hover:border-red-500 rounded-xl text-zinc-300 hover:text-white transition-all">
+          🚀 Live Demo
+        </a>
+        <a href="https://youtu.be/placeholder" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 hover:border-red-500 rounded-xl text-zinc-300 hover:text-white transition-all">
+          🎬 Demo Video
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="h-16 border-t border-zinc-900 bg-[#09090b]/80 backdrop-blur-lg flex items-center justify-between px-6 md:px-8 z-10 shrink-0">
+    <div class="text-[10px] mono text-zinc-600 uppercase">Sotto · Stellar Testnet · Sealed-Bid ZK Auctions</div>
+    <div class="flex items-center gap-4">
+      <button onclick="prevSlide()" class="px-4 py-1.5 border border-zinc-800 hover:border-red-500 rounded-lg text-xs mono text-zinc-400 hover:text-red-400 transition-all select-none">PREV</button>
+      <span id="slide-num" class="text-xs mono text-red-400">1 / 12</span>
+      <button onclick="nextSlide()" class="px-4 py-1.5 border border-zinc-800 hover:border-red-500 rounded-lg text-xs mono text-zinc-400 hover:text-red-400 transition-all select-none">NEXT</button>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const slideNum = document.getElementById('slide-num');
+    function updateSlides() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+      slideNum.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlides(); } }
+    function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); } }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') nextSlide();
+    });
+  </script>
+</body>
+</html>
