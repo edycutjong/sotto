@@ -529,26 +529,11 @@ export default function SottoDashboard() {
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 relative">
-              <svg
-                viewBox="0 0 512 512"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full text-violet-500"
-              >
-                <polygon
-                  points="256,40 440,146 440,366 256,472 72,366 72,146"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="24"
-                />
-                <path
-                  d="M 180 180 C 180 140, 332 140, 332 200 C 332 240, 256 240, 256 280 C 256 320, 180 320, 180 360 C 180 400, 332 400, 332 360"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="36"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <img
+                src="/icon.svg"
+                className="w-full h-full filter drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]"
+                alt="Sotto Logo"
+              />
             </div>
             <span className="font-display font-extrabold text-xl tracking-tight text-white">
               SOTTO
