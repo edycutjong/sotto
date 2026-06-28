@@ -9,7 +9,7 @@
   "bugs": {
     "url": "https://github.com/edycutjong/sotto/issues"
   },
-  "homepage": "https://github.com/edycutjong/sotto#readme",
+  "homepage": "https://sotto.edycu.dev",
   "engines": {
     "node": ">=22.0.0"
   },
