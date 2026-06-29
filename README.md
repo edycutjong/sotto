@@ -12,8 +12,8 @@
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live-Demo-06b6d4?style=for-the-badge)](https://sotto.edycu.dev)
 [![Pitch Deck](https://img.shields.io/badge/📊_Pitch-Deck-f59e0b?style=for-the-badge)](https://sotto.edycu.dev/pitch.html)
-[![Demo Video](https://img.shields.io/badge/🎬_Demo-Video-ef4444?style=for-the-badge)](https://youtu.be/placeholder)
-[![Built for Stellar Hacks](https://img.shields.io/badge/DoraHacks-Stellar_Hacks_ZK-8b5cf6?style=for-the-badge)](https://dorahacks.io)
+[![Demo Video](https://img.shields.io/badge/🎬_Demo-Video-ef4444?style=for-the-badge)](https://youtu.be/PAbWjCXx5XU)
+[![Built for Stellar Hacks](https://img.shields.io/badge/DoraHacks-Stellar_Hacks_ZK-8b5cf6?style=for-the-badge)](https://dorahacks.io/hackathon/stellar-hacks-zk)
 
   <br/>
 
