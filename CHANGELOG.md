@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](../../compare/v1.1.1...v1.2.0) (2026-06-29)
+
+### 🚀 Features
+
+- **sotto:** update verifier and auction contract ids to real testnet deployments (a61ed29)
+
+### 📝 Documentation
+
+- **readme:** update demo video YouTube URL and configuration (ede7588)
+- **readme:** update readme content and references (f337494)
+- **readme:** add Demo Materials section and link GitHub & Pitch Deck (8640acf)
+
 ## [1.1.1](../../compare/v1.1.0...v1.1.1) (2026-06-28)
 
 ### 🐛 Bug Fixes
