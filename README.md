@@ -46,6 +46,14 @@ Procurement departments run reverse auctions to select suppliers for manufacturi
   <img src="public/og-image.png" alt="Sotto Dashboard Walkthrough" width="100%">
 </div>
 
+<div align="center">
+  <img src="docs/screenshots/03-submit-commitment.png" alt="Sotto — submit a sealed bid commitment" width="32%">
+  <img src="docs/screenshots/04-produce-blocks.png" alt="Sotto — ledger-sequence time-lock advances the auction" width="32%">
+  <img src="docs/screenshots/05-settlement-proofs.png" alt="Sotto — sealed-bid auction console with shielded commitments" width="32%">
+  <br/>
+  <sub><em>Sealed-bid submission &amp; ZK settlement (demo sandbox). Reproduce the real proof with <code>npm run prove:demo</code>.</em></sub>
+</div>
+
 > **The Sealed-Bid Settlement Flow**: Escrow USDC Budget $\rightarrow$ Submit Private Commitments $\rightarrow$ Pass Time-Lock sequence $\rightarrow$ Compile ZK Prover witness $\rightarrow$ Settle natively on-chain.
 
 ---
