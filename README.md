@@ -5,7 +5,7 @@
   <img src="docs/readme-hero.png" alt="Sotto Hero Banner" width="100%">
 
   <p><strong>✅ Real Groth16 (BN254) proof verified on Stellar testnet.</strong><br/>
-  Reproduce with <code>npm run prove:demo</code> — verifier <code>CAZA5LCB7GPN3T64EDRNCVTAJSN243BBK7TPRCI5BBVAVQ2C7Y7C3XPV</code>; a fresh snarkjs winner proof makes <code>verify_proof</code> return true on-chain, and tampered inputs are rejected.<br/>
+  Reproduce with <code>npm run prove:demo</code> — verifier <code>CBN2R3T3L6EFLNPKGHRK5OIVNTKKUY6BTP2CQ7EIRN5CWDFGMEQVKVRA</code>; a fresh snarkjs winner proof makes <code>verify_proof</code> return true on-chain, and tampered inputs are rejected.<br/>
   <em>Honest status: the hosted web app is a demo sandbox (local crypto simulations for UX); the load-bearing ZK is the prove:demo pipeline plus the deployed contract.</em></p>
 
   <br/>
@@ -47,6 +47,25 @@ Procurement departments run reverse auctions to select suppliers for manufacturi
 </div>
 
 > **The Sealed-Bid Settlement Flow**: Escrow USDC Budget $\rightarrow$ Submit Private Commitments $\rightarrow$ Pass Time-Lock sequence $\rightarrow$ Compile ZK Prover witness $\rightarrow$ Settle natively on-chain.
+
+---
+
+## ✅ Proof of On-Chain Verification (reproduce it)
+
+`npm run prove:demo` generates a **fresh** BN254 Groth16 "lowest valid bid" proof and verifies it live on Stellar testnet. Example run:
+
+```text
+Generating real BN254 Groth16 proof (sealed-bid auction)...
+off-chain verify: true
+Invoking on-chain verify_proof on CBN2R3T3L6EFLNPKGHRK5OIVNTKKUY6BTP2CQ7EIRN5CWDFGMEQVKVRA ...
+on-chain verify_proof => true
+
+✅ JS-generated auction proof accepted on-chain (winner bid 388).
+```
+
+Valid proof ⇒ `true`; the tampered/negative control is covered by the verifier's `cargo test` suite.
+
+- **SottoVerifier (testnet):** [`CBN2R3T3…GMEQVKVRA`](https://stellar.expert/explorer/testnet/contract/CBN2R3T3L6EFLNPKGHRK5OIVNTKKUY6BTP2CQ7EIRN5CWDFGMEQVKVRA)
 
 ---
 
@@ -142,7 +161,7 @@ We integrate deep with **Stellar Soroban Protocol 25/26** primitives:
 ### Deployed Contract Details
 
 - **SottoAuctionContract:** `CAFAQ3LCQFHRQ4A2H2HTJEHODQF2NAAZWU7TYT5ZYI7L4TTP7DMQFBTO`
-- **SottoVerifier:** `CAZA5LCB7GPN3T64EDRNCVTAJSN243BBK7TPRCI5BBVAVQ2C7Y7C3XPV`
+- **SottoVerifier:** `CBN2R3T3L6EFLNPKGHRK5OIVNTKKUY6BTP2CQ7EIRN5CWDFGMEQVKVRA`
 
 ### Contract Endpoints & Parameters
 

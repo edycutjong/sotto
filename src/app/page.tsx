@@ -330,7 +330,7 @@ export default function SottoDashboard() {
 
         const contractId =
           process.env.NEXT_PUBLIC_AUCTION_CONTRACT_ID ||
-          "CB3C5KQL4MZO3Q2SXY7HLTJWV32WXLSP73L5J5Z6R4M5Y3H2R7OWTEST";
+          "CAFAQ3LCQFHRQ4A2H2HTJEHODQF2NAAZWU7TYT5ZYI7L4TTP7DMQFBTO";
         if (!contractId || contractId.startsWith("CB...")) {
           throw new Error(
             "Stellar Sotto Auction Contract ID is not configured. Please set NEXT_PUBLIC_AUCTION_CONTRACT_ID in your env.",
@@ -339,7 +339,7 @@ export default function SottoDashboard() {
 
         const verifierId =
           process.env.NEXT_PUBLIC_VERIFIER_CONTRACT_ID ||
-          "CB3C5KQL4MZO3Q2SXY7HLTJWV32WXLSP73L5J5Z6R4M5Y3H2R7OWTEST";
+          "CBN2R3T3L6EFLNPKGHRK5OIVNTKKUY6BTP2CQ7EIRN5CWDFGMEQVKVRA";
 
         const rpcUrl =
           process.env.NEXT_PUBLIC_STELLAR_RPC_URL ||

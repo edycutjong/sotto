@@ -1,5 +1,5 @@
 // End-to-end REAL proving demo for Sotto's sealed-bid auction circuit:
-//   fresh random sealed bids -> snarkjs groth16.fullProve (bls12-381)
+//   fresh random sealed bids -> snarkjs groth16.fullProve (BN254 / bn128)
 //   -> convert to soroban bytes -> invoke the on-chain verifier.
 import { execFileSync, execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -111,7 +111,7 @@ async function run() {
   };
 
   console.log(
-    "Generating real bls12-381 Groth16 proof (sealed-bid auction)...",
+    "Generating real BN254 Groth16 proof (sealed-bid auction)...",
   );
   const { proof, publicSignals } = await snarkjs.groth16.fullProve(
     input,

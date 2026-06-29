@@ -8,12 +8,13 @@ export async function GET() {
       contracts: {
         auction_settlement:
           process.env.NEXT_PUBLIC_AUCTION_CONTRACT_ID ||
-          "CB7A32J4K24L5MXB932NLAOSJDH732LA0S8D7S6A8D9S0A8D7SGA8D9D",
+          "CAFAQ3LCQFHRQ4A2H2HTJEHODQF2NAAZWU7TYT5ZYI7L4TTP7DMQFBTO",
         verifier:
           process.env.NEXT_PUBLIC_VERIFIER_CONTRACT_ID ||
-          "CC9S8D7S6A5D4F3G2H1J0K9L8M7N6B5V4C3X2Z1A0S8D7F6G5H4J3K2L1M0",
+          "CBN2R3T3L6EFLNPKGHRK5OIVNTKKUY6BTP2CQ7EIRN5CWDFGMEQVKVRA",
       },
-      active_auctions: 12,
+      verify_entrypoint: "verify_proof",
+      note: "Real BN254 Groth16 sealed-bid verification is reproduced via `npm run prove:demo`.",
       protocol_version: 25,
     },
     {
