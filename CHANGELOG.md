@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](../../compare/v1.2.0...v1.3.0) (2026-07-01)
+
+### 🚀 Features
+
+- **wallet:** real Freighter connect via official SDK + demo button (f196d87)
+
+### ✅ Tests
+
+- **core:** verify and complete unit test suites and coverage (92ebac3)
+
+### 💄 Style
+
+- format pitch.html with prettier (dd2ba35)
+
+### 📝 Documentation
+
+- **pitch:** replace page 1 emojis with SVG icons (93c3c92)
+- **pitch:** replace emoji with logo icon and update demo video link (bb85942)
+- **readme:** add walkthrough screenshot gallery to README (42796c1)
+
 ## [1.2.0](../../compare/v1.1.1...v1.2.0) (2026-06-29)
 
 ### 🚀 Features
