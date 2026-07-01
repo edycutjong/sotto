@@ -34,43 +34,63 @@ export default function SottoDashboard() {
       `[Freighter] Connecting to Freighter Wallet...`,
     ]);
     try {
-      const win = window as unknown as Record<string, Record<string, unknown>>;
-      const freighterDetected =
-        typeof window !== "undefined" && (win.stellarWebKit || win.stellar);
-      if (!freighterDetected) {
+      const { isConnected, requestAccess } =
+        await import("@stellar/freighter-api");
+
+      const connection = await isConnected();
+      if (!connection.isConnected) {
         setLogs((prev) => [
           ...prev,
-          "[Freighter] Wallet extension not detected. Initializing Demo Mode...",
+          "[Freighter] Extension not detected. Install Freighter, or use the Demo button to explore the sandbox.",
         ]);
-        setTimeout(() => {
-          setWalletConnected(true);
-          setWalletAddress("GB_BUYER...");
-          setLogs((prev) => [
-            ...prev,
-            `[Freighter] Connected (Demo Mode). Address: GB_BUYER...`,
-          ]);
-        }, 1000);
         return;
       }
 
-      const pubKey = await (
-        window as unknown as {
-          stellar: { getPublicKey: () => Promise<string> };
-        }
-      ).stellar.getPublicKey();
-      if (pubKey) {
-        setWalletConnected(true);
-        setWalletAddress(pubKey);
-        setSandboxMode(false);
+      const access = await requestAccess();
+      if (access.error) {
         setLogs((prev) => [
           ...prev,
-          `[Freighter] Connected. Address: ${pubKey}`,
+          `[Freighter] Access denied or cancelled: ${JSON.stringify(access.error)}`,
         ]);
+        return;
       }
+      if (!access.address) {
+        setLogs((prev) => [
+          ...prev,
+          "[Freighter] No account returned by the wallet.",
+        ]);
+        return;
+      }
+
+      setWalletConnected(true);
+      setWalletAddress(access.address);
+      setSandboxMode(false);
+      setLogs((prev) => [
+        ...prev,
+        `[Freighter] Connected. Address: ${access.address}`,
+      ]);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       setLogs((prev) => [...prev, `[ERROR] ${msg}`]);
     }
+  };
+
+  // Predefined demo identity — no wallet extension required. Stays in sandbox
+  // mode so nothing is broadcast; purely for exploring the console UI.
+  const connectDemoWallet = () => {
+    setLogs((prev) => [
+      ...prev,
+      "[Sandbox] Loading predefined demo identity (no wallet required)...",
+    ]);
+    setTimeout(() => {
+      setWalletConnected(true);
+      setWalletAddress("GB_BUYER...");
+      setSandboxMode(true);
+      setLogs((prev) => [
+        ...prev,
+        `[Sandbox] Demo identity active: GB_BUYER... (simulation only)`,
+      ]);
+    }, 600);
   };
 
   // Custom Auction Input
@@ -391,81 +411,76 @@ export default function SottoDashboard() {
           nativeToScVal(Buffer.from(proofBytes)),
         );
 
-        if (
-          typeof window !== "undefined" &&
-          "stellar" in window &&
-          window.stellar
-        ) {
-          setLogs((prev) => [
-            ...prev,
-            `[Freighter] Fetching account details for wallet: ${walletAddress}...`,
-          ]);
-          const account = await server.getAccount(walletAddress);
+        const { isConnected, signTransaction } =
+          await import("@stellar/freighter-api");
 
-          const tx = new TransactionBuilder(account, {
-            fee: "100000",
-            networkPassphrase: Networks.TESTNET,
-          })
-            .addOperation(callOp)
-            .setTimeout(30)
-            .build();
-
-          const xdrTx = tx.toXDR();
-
-          setLogs((prev) => [
-            ...prev,
-            `[Freighter] Requesting wallet signature for Sotto settlement...`,
-          ]);
-          const signedTx = await (
-            window as unknown as {
-              stellar: {
-                signTransaction: (
-                  xdr: string,
-                  opts: { networkPassphrase: string },
-                ) => Promise<string>;
-              };
-            }
-          ).stellar.signTransaction(xdrTx, {
-            networkPassphrase: Networks.TESTNET,
-          });
-
-          setLogs((prev) => [
-            ...prev,
-            `[Stellar] Submitting transaction to Soroban RPC...`,
-          ]);
-          const signedTxObj = TransactionBuilder.fromXDR(
-            signedTx,
-            Networks.TESTNET,
-          );
-          const sendResponse = await server.sendTransaction(signedTxObj);
-          if (sendResponse.status === "ERROR") {
-            throw new Error(
-              `RPC submit error: ${JSON.stringify(sendResponse.errorResult)}`,
-            );
-          }
-
-          let txStatus = await server.getTransaction(sendResponse.hash);
-          let attempts = 0;
-          while (txStatus.status === "NOT_FOUND" && attempts < 10) {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            txStatus = await server.getTransaction(sendResponse.hash);
-            attempts++;
-          }
-
-          if (txStatus.status === "SUCCESS") {
-            setLogs((prev) => [
-              ...prev,
-              `[Stellar] Settle transaction committed! Hash: ${sendResponse.hash}`,
-            ]);
-          } else {
-            throw new Error(
-              `Transaction failed with status: ${txStatus.status}`,
-            );
-          }
-        } else {
+        const connection = await isConnected();
+        if (!connection.isConnected) {
           throw new Error(
-            "Freighter wallet not detected. Install Freighter browser extension to settle on Testnet.",
+            "Freighter wallet not detected. Install the Freighter browser extension (or use Sandbox mode) to settle on Testnet.",
           );
+        }
+
+        setLogs((prev) => [
+          ...prev,
+          `[Freighter] Fetching account details for wallet: ${walletAddress}...`,
+        ]);
+        const account = await server.getAccount(walletAddress);
+
+        const tx = new TransactionBuilder(account, {
+          fee: "100000",
+          networkPassphrase: Networks.TESTNET,
+        })
+          .addOperation(callOp)
+          .setTimeout(30)
+          .build();
+
+        const xdrTx = tx.toXDR();
+
+        setLogs((prev) => [
+          ...prev,
+          `[Freighter] Requesting wallet signature for Sotto settlement...`,
+        ]);
+        const signResult = await signTransaction(xdrTx, {
+          networkPassphrase: Networks.TESTNET,
+          address: walletAddress,
+        });
+        if (signResult.error) {
+          throw new Error(
+            `Freighter signing failed: ${JSON.stringify(signResult.error)}`,
+          );
+        }
+
+        setLogs((prev) => [
+          ...prev,
+          `[Stellar] Submitting transaction to Soroban RPC...`,
+        ]);
+        const signedTxObj = TransactionBuilder.fromXDR(
+          signResult.signedTxXdr,
+          Networks.TESTNET,
+        );
+        const sendResponse = await server.sendTransaction(signedTxObj);
+        if (sendResponse.status === "ERROR") {
+          throw new Error(
+            `RPC submit error: ${JSON.stringify(sendResponse.errorResult)}`,
+          );
+        }
+
+        let txStatus = await server.getTransaction(sendResponse.hash);
+        let attempts = 0;
+        while (txStatus.status === "NOT_FOUND" && attempts < 10) {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          txStatus = await server.getTransaction(sendResponse.hash);
+          attempts++;
+        }
+
+        if (txStatus.status === "SUCCESS") {
+          setLogs((prev) => [
+            ...prev,
+            `[Stellar] Settle transaction committed! Hash: ${sendResponse.hash}`,
+          ]);
+        } else {
+          throw new Error(`Transaction failed with status: ${txStatus.status}`);
         }
       } catch (err: unknown) {
         const errMsg = err instanceof Error ? err.message : String(err);
@@ -582,18 +597,32 @@ export default function SottoDashboard() {
               Produce Block (+100)
             </button>
 
-            <button
-              onClick={connectWallet}
-              className={`text-xs font-semibold px-4 py-2 rounded-lg border transition-all cursor-pointer ${
-                walletConnected
-                  ? "bg-violet-500/10 border-violet-500/30 text-violet-400 font-mono"
-                  : "bg-slate-900 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 text-white shadow-sm"
-              }`}
-            >
-              {walletConnected
-                ? `CONNECTED: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
-                : "CONNECT FREIGHTER"}
-            </button>
+            {walletConnected ? (
+              <button
+                onClick={connectWallet}
+                title={sandboxMode ? "Demo identity (sandbox)" : walletAddress}
+                className="text-xs font-semibold px-4 py-2 rounded-lg border bg-violet-500/10 border-violet-500/30 text-violet-400 font-mono transition-all cursor-pointer"
+              >
+                {`${sandboxMode ? "DEMO" : "CONNECTED"}: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`}
+              </button>
+            ) : (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={connectWallet}
+                  className="text-xs font-semibold px-4 py-2 rounded-lg border bg-slate-900 hover:bg-slate-800 border-slate-700/80 hover:border-slate-600 text-white shadow-sm transition-all cursor-pointer"
+                >
+                  <span className="sm:hidden">CONNECT</span>
+                  <span className="hidden sm:inline">CONNECT FREIGHTER</span>
+                </button>
+                <button
+                  onClick={connectDemoWallet}
+                  title="Load a predefined demo identity — no wallet extension required"
+                  className="text-xs font-semibold px-3 py-2 rounded-lg border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 transition-all cursor-pointer"
+                >
+                  DEMO
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </header>
