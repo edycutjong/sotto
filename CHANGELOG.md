@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0](../../compare/v1.3.0...v1.4.0) (2026-07-01)
+
+### 🚀 Features
+
+- **ui:** wallet Disconnect button and custom 404 page (06a8f8e)
+
 ## [1.3.0](../../compare/v1.2.0...v1.3.0) (2026-07-01)
 
 ### 🚀 Features
