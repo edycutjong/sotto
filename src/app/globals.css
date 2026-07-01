@@ -171,3 +171,33 @@ body {
 .glow-glow {
   filter: drop-shadow(0 0 12px var(--color-primary));
 }
+
+/* ─── UI Polish: accessibility + refinement ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+::selection { background: #f59e0b; color: #0b0b0f; }
+html { scroll-behavior: smooth; }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, #8b5cf6 45%, transparent) transparent;
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, #8b5cf6 40%, transparent);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }

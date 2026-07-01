@@ -165,7 +165,7 @@ export default function SottoDashboard() {
 
     if (isNaN(amountVal) || isNaN(saltVal) || !bidderAddress) return;
 
-    // Simulate Poseidon2 hash via crypto mock
+    // Simulate Poseidon hash via crypto mock
     const inputStr = `${amountVal}-${saltVal}`;
     let hash = "";
     // Simple mock SHA256 hashing for UI demo stability
@@ -267,7 +267,7 @@ export default function SottoDashboard() {
     await delay(800);
     setLogs((prev) => [
       ...prev,
-      `[prover] Hash check: Poseidon2(${win.amount}, ${win.salt}) matches commitment fb1a1fd7... ... PASS`,
+      `[prover] Hash check: Poseidon(${win.amount}, ${win.salt}) matches commitment fb1a1fd7... ... PASS`,
     ]);
     await delay(1000);
     setLogs((prev) => [
@@ -546,7 +546,7 @@ export default function SottoDashboard() {
               href="https://github.com/edycutjong/sotto"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white text-xs font-mono transition-colors ml-4"
+              className="hidden md:inline text-slate-400 hover:text-white text-xs font-mono transition-colors ml-4"
             >
               [ GitHub ]
             </a>
@@ -554,14 +554,14 @@ export default function SottoDashboard() {
               href="/pitch.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white text-xs font-mono transition-colors ml-2"
+              className="hidden md:inline text-slate-400 hover:text-white text-xs font-mono transition-colors ml-2"
             >
               [ Pitch Deck ]
             </a>
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 font-mono text-xs bg-slate-900/60 border border-slate-800 px-3.5 py-2 rounded-lg">
+            <div className="hidden lg:flex items-center gap-2 font-mono text-xs bg-slate-900/60 border border-slate-800 px-3.5 py-2 rounded-lg">
               <span className="text-slate-400">Ledger Sequence:</span>
               <span className="text-amber-500 font-bold">
                 {ledgerSequence.toLocaleString()}
@@ -971,7 +971,7 @@ export default function SottoDashboard() {
                     <span className="text-violet-400 block font-semibold mb-1">
                       LOCAL CRYPTOGRAPHIC WRAPPER
                     </span>
-                    Poseidon2(Bid Amount, Salt) is executed entirely locally on
+                    Poseidon(Bid Amount, Salt) is executed entirely locally on
                     your workstation. The bid amount and salt are encrypted
                     under the Manufacturer&apos;s public key using ECIES. Only
                     the commitment hash and the encrypted envelope are
