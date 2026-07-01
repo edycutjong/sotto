@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { triggerConfetti } from "../lib/confetti";
+import Link from "next/link";
 
 interface Bid {
   id: string;
@@ -1193,6 +1194,12 @@ export default function SottoDashboard() {
             >
               Telemetry API
             </a>
+            <Link href="/privacy" className="hover:text-white transition-all">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-white transition-all">
+              Terms
+            </Link>
             <span className="text-slate-700">|</span>
             <span className="text-emerald-500">Verifier Online</span>
           </div>
