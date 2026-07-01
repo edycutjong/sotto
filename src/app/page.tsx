@@ -93,6 +93,13 @@ export default function SottoDashboard() {
     }, 600);
   };
 
+  const disconnectWallet = () => {
+    setWalletConnected(false);
+    setWalletAddress("GB_BUYER...");
+    setSandboxMode(true);
+    setLogs((prev) => [...prev, "[Wallet] Disconnected."]);
+  };
+
   // Custom Auction Input
   const [newBudget, setNewBudget] = useState<string>("1000000");
   const [newReserve, setNewReserve] = useState<string>("500000");
@@ -598,13 +605,23 @@ export default function SottoDashboard() {
             </button>
 
             {walletConnected ? (
-              <button
-                onClick={connectWallet}
-                title={sandboxMode ? "Demo identity (sandbox)" : walletAddress}
-                className="text-xs font-semibold px-4 py-2 rounded-lg border bg-violet-500/10 border-violet-500/30 text-violet-400 font-mono transition-all cursor-pointer"
-              >
-                {`${sandboxMode ? "DEMO" : "CONNECTED"}: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`}
-              </button>
+              <div className="flex items-center gap-2">
+                <span
+                  title={
+                    sandboxMode ? "Demo identity (sandbox)" : walletAddress
+                  }
+                  className="text-xs font-semibold px-4 py-2 rounded-lg border bg-violet-500/10 border-violet-500/30 text-violet-400 font-mono"
+                >
+                  {`${sandboxMode ? "DEMO" : "CONNECTED"}: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`}
+                </span>
+                <button
+                  onClick={disconnectWallet}
+                  title="Disconnect wallet"
+                  className="text-xs font-semibold px-3 py-2 rounded-lg border border-slate-700/80 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer"
+                >
+                  DISCONNECT
+                </button>
+              </div>
             ) : (
               <div className="flex items-center gap-2">
                 <button
