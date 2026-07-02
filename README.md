@@ -5,7 +5,7 @@
   <img src="docs/readme-hero.png" alt="Sotto Hero Banner" width="100%">
 
   <p><strong>✅ Real Groth16 (BN254) proof verified on Stellar testnet.</strong><br/>
-  Reproduce with <code>npm run prove:demo</code> — verifier <code>CBN2R3T3L6EFLNPKGHRK5OIVNTKKUY6BTP2CQ7EIRN5CWDFGMEQVKVRA</code>; a fresh snarkjs winner proof makes <code>verify_proof</code> return true on-chain, and tampered inputs are rejected.<br/>
+  Reproduce with <code>npm run prove:demo</code> — verifier <a href="https://stellar.expert/explorer/testnet/contract/CBN2R3T3L6EFLNPKGHRK5OIVNTKKUY6BTP2CQ7EIRN5CWDFGMEQVKVRA"><code>CBN2R3T3L6EFLNPKGHRK5OIVNTKKUY6BTP2CQ7EIRN5CWDFGMEQVKVRA</code></a>; a fresh snarkjs winner proof makes <code>verify_proof</code> return true on-chain, and tampered inputs are rejected.<br/>
   <strong>Don&rsquo;t trust us — verify it in your browser:</strong> click <strong>&ldquo;Verify a real proof on-chain&rdquo;</strong> on the <a href="https://sotto.edycu.dev">live site</a> (no wallet needed) — a read-only Soroban call returns <code>true</code> for a real proof and <code>false</code> for tampered inputs.<br/>
   <em>Honest status: the interactive console uses local crypto simulations for UX; the load-bearing ZK is that deployed verifier plus <code>npm run prove:demo</code> — both now witnessable from the site itself.</em></p>
 
