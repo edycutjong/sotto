@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.0](../../compare/v1.6.0...v1.7.0) (2026-07-02)
+
+### 🚀 Features
+
+- **ui:** show app version badge in footer (9413143)
+
 ## [1.6.0](../../compare/v1.5.0...v1.6.0) (2026-07-02)
 
 ### 🚀 Features
