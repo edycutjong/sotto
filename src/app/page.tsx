@@ -1186,7 +1186,10 @@ export default function SottoDashboard() {
       <footer className="border-t border-slate-900 py-8 bg-slate-950/40 mt-auto">
         <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2 font-mono text-xs text-slate-500">
-            <span>© 2026 Sotto. Built for Stellar Hacks: Real-World ZK.</span>
+            <span>
+              © 2026 Sotto. Built for Stellar Hacks: Real-World ZK. · v
+              {process.env.NEXT_PUBLIC_APP_VERSION}
+            </span>
           </div>
           <div className="flex items-center gap-6 text-xs text-slate-400 font-mono">
             <a
