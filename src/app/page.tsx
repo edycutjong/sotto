@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { triggerConfetti } from "../lib/confetti";
+import VerifyOnchainPanel from "../components/VerifyOnchainPanel";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -646,6 +647,9 @@ export default function SottoDashboard() {
           </div>
         </div>
       </header>
+
+      {/* Real on-chain ZK verification (witnessable, no wallet) */}
+      <VerifyOnchainPanel />
 
       {/* Sandbox Toggle / Banner */}
       <div className="container mx-auto px-6 mt-6 relative z-10">
