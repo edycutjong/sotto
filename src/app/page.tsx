@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { triggerConfetti } from "../lib/confetti";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Bid {
   id: string;
@@ -552,9 +553,10 @@ export default function SottoDashboard() {
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 relative">
-              <img
+              <Image
                 src="/icon.svg"
-                className="w-full h-full filter drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]"
+                fill
+                className="filter drop-shadow-[0_0_8px_rgba(139,92,246,0.4)] object-contain"
                 alt="Sotto Logo"
               />
             </div>
