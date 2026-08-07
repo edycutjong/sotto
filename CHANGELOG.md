@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.8.1](../../compare/v1.8.0...v1.8.1) (2026-08-07)
+
+### 🏗️ Build
+
+- **deps-dev:** bump tsx from 4.22.4 to 4.23.1 (#25) (38751e4)
+- **deps-dev:** bump tailwindcss from 4.3.1 to 4.3.3 (#26) (2b7b0b9)
+- **deps-dev:** bump @tailwindcss/postcss from 4.3.1 to 4.3.3 (#27) (e542686)
+- **deps:** bump @stellar/stellar-sdk from 16.0.0 to 16.1.0 (#30) (3225416)
+- **deps:** bump next from 16.2.9 to 16.2.12 (#31) (c1221ec)
+- **deps-dev:** bump eslint-config-next from 16.2.9 to 16.2.12 (#32) (3eeedcb)
+
+### 📝 Documentation
+
+- **readme:** link the hook contract ID to stellar.expert (a49f42d)
+- **readme:** point judges at the one-click on-chain verify (a0834a9)
+
 ## [1.8.0](../../compare/v1.7.0...v1.8.0) (2026-07-02)
 
 ### 🚀 Features
