@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.8.2](../../compare/v1.8.1...v1.8.2) (2026-08-22)
+
+### 🐛 Bug Fixes
+
+- **deps:** resolve 10 dependency vulnerabilities via lockfile (db2b16c)
+
+### 🏗️ Build
+
+- **deps-dev:** bump tsx from 4.23.9 to 4.23.12 (#42) (8706687)
+- **deps-dev:** bump @playwright/test from 1.61.0 to 1.62.1 (#33) (f0927ea)
+- **deps:** bump @stellar/stellar-sdk from 16.1.0 to 16.2.0 (#35) (a5e54e3)
+- **deps-dev:** bump eslint-config-next from 16.2.12 to 16.3.0 (#37) (fa5ad1c)
+- **deps-dev:** bump tsx from 4.23.1 to 4.23.9 (#38) (b8ddec1)
+- **deps:** bump react and @types/react (#40) (5ab8c52)
+
+### 🔧 Chores
+
+- remove agent instruction files from public repo (8a3cb36)
+
 ## [1.8.1](../../compare/v1.8.0...v1.8.1) (2026-08-07)
 
 ### 🏗️ Build
